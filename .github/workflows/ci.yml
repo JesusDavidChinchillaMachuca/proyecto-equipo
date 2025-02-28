@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main  # Se ejecutará cada vez que hagas un push a main
+  pull_request:
+    branches:
+      - main  # Se ejecutará en cada pull request a main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # Usa un servidor Linux de GitHub Actions
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Instalar dependencias
+        run: npm install  # O cambia según tu proyecto (ej: pip install para Python)
+
+      - name: Ejecutar pruebas
+        run: npm test  # Cambia según las pruebas de tu proyecto
